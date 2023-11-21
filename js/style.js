@@ -1,6 +1,7 @@
 const formGenerator = document.querySelector(".form-generator");
 const boardImages = document.querySelector(".board-images");
 const OPINAI_API_KEY = "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";
+let isImageGenerated = true;
 
 const updateImages = (imagesArray) => {
   imagesArray.forEach((imbObject, index) => {
@@ -39,11 +40,17 @@ const generateAiImages = async (userPrompt, userImgQuantity) => {
     );
     const { data } = await response.json();
     updateImages(data);
-  } catch (error) {}
+  } catch (error) {
+    console.log(error.message);
+  } finally {
+    isImageGenerated = false;
+  }
 };
 
 const handleFormSubmission = (e) => {
   e.preventDefault();
+  if (isImageGenerated) return;
+  isImageGenerated = true;
 
   // Get user [ input and image quantity ] values from the form
   const userPrompt = e.srcElement[0].value;
