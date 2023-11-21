@@ -1,0 +1,264 @@
+:root {
+  --dark-color: #3d3dd0;
+  --widthContainer: 500px;
+  --sizeImage: 273px;
+  --gap: 20px;
+  --flateBorderC: #f0f0f0;
+  --flateBackgroundC: #f6f6f6;
+}
+
+@media (max-width: 915px) {
+  :root {
+    --sizeImage: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --widthContainer: 400px;
+    --sizeImage: 273px;
+  }
+}
+
+@media (max-width: 630px) {
+  :root {
+    --sizeImage: 200px;
+  }
+}
+
+@media (max-width: 470px) {
+  :root {
+    --widthContainer: 300px;
+    --sizeImage: 300px;
+    --gap: 10px;
+  }
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  user-select: none;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body * {
+  text-transform: capitalize;
+}
+
+.btnClick:active {
+  transform: scale(0.96);
+}
+
+.generator {
+  width: 100%;
+  height: 300px;
+  padding-bottom: 20px;
+  display: grid;
+  place-content: end center;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('../bg.png');
+}
+
+.generator::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: .5;
+  z-index: 1;
+  background: #000;
+}
+
+.generator h2 {
+  padding-block: 20px;
+  text-align: center;
+  color: #fff;
+  position: relative;
+  z-index: 5;
+}
+
+.generator .form-generator {
+  width: var(--widthContainer);
+  height: 40px;
+  margin: auto;
+  border-radius: 50px;
+  position: relative;
+  z-index: 5;
+  background: #fffffd;
+}
+
+.generator .form-generator input,
+.generator .form-generator .count,
+.generator .form-generator button {
+  position: absolute;
+  top: 50%;
+  border: none;
+  outline: none;
+  transform: translateY(-50%);
+}
+
+.generator .form-generator input {
+  width: 100%;
+  height: 100%;
+  padding-left: 10px;
+  text-transform: none;
+  background: transparent;
+}
+
+.generator .form-generator .count {
+  width: 80px;
+  height: calc(100% - 5px);
+  right: 100px;
+  z-index: 9;
+  color: #000;
+  background: transparent;
+}
+
+.generator .form-generator button {
+  width: 90px;
+  height: calc(100% - 10px);
+  cursor: pointer;
+  transition: .1s;
+  right: 5px;
+  color: #fff;
+  border-radius: 50px;
+  background: var(--dark-color);
+}
+
+@media (max-width: 768px) {
+  .generator .form-generator {
+    height: 40px;
+  }
+
+  .generator .form-generator input,
+  .generator .form-generator .count,
+  .generator .form-generator button {
+    font-size: 10px;
+  }
+
+  .generator .form-generator .count,
+  .generator .form-generator button {
+    width: 70px;
+  }
+
+  .generator .form-generator .count {
+    right: 80px;
+  }
+}
+
+@media (max-width: 470px) {
+  .generator .form-generator {
+    height: 30px;
+  }
+
+  .generator .form-generator input,
+  .generator .form-generator .count,
+  .generator .form-generator button {
+    font-size: 8px;
+  }
+
+  .generator .form-generator .count,
+  .generator .form-generator button {
+    width: 50px;
+  }
+
+  .generator .form-generator .count {
+    right: 60px;
+  }
+
+  .generator .form-generator button {
+    height: calc(100% - 5px);
+    right: 2.5px;
+  }
+}
+
+.container {
+  margin: auto;
+  position: relative;
+  padding: var(--gap);
+}
+
+.container .board-images {
+  display: flex;
+  gap: var(--gap);
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.container .board-images .img {
+  width: var(--sizeImage);
+  height: var(--sizeImage);
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  background: var(--flateBackgroundC);
+  border: 3px solid var(--flateBorderC);
+}
+
+.container .board-images .img img {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+.container .board-images .img .dounload-btn {
+  font-size: 20px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: #fff;
+}
+
+.container .board-images .img .dounload-btn::before {
+  content: attr(data-hover);
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  color: #fff;
+  font-size: 12px;
+  transform: translate(-5px, -50%);
+}
+
+@media (min-width: 470px) and (max-width: 630px) {
+  .container .board-images .img .dounload-btn::before {
+    display: none;
+  }
+}
+
+.container .board-images .img .dounload-btn img {
+  display: none;
+}
+
+.developer {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.load {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: .7;
+  background: #11113d;
+  display: grid;
+  color: #fff;
+  font-size: 50px;
+  place-content: center;
+}
