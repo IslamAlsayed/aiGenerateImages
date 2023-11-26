@@ -70,7 +70,7 @@ body * {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url('../bg.png');
+  background-image: url('./bg.png');
 }
 
 .generator::before {
@@ -86,69 +86,66 @@ body * {
 }
 
 .generator h2 {
-  padding-block: 20px;
-  text-align: center;
   color: #fff;
   position: relative;
   z-index: 5;
+  padding-block: 20px;
+  text-align: center;
 }
 
 .generator .form-generator {
   width: var(--widthContainer);
-  height: 40px;
   margin: auto;
-  border-radius: 50px;
   position: relative;
   z-index: 5;
+  border-radius: 50px;
   background: #fffffd;
+}
+
+.generator .form-generator,
+.generator .form-generator .details {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .generator .form-generator input,
 .generator .form-generator .count,
 .generator .form-generator button {
-  position: absolute;
-  top: 50%;
   border: none;
   outline: none;
-  transform: translateY(-50%);
+  background: transparent;
 }
 
 .generator .form-generator input {
-  width: 100%;
+  flex: 1;
   height: 100%;
   padding-left: 10px;
-  padding-right: 190px;
   text-transform: none;
-  background: transparent;
+  border-radius: 50px 0 0 50px;
 }
 
 .generator .form-generator .count {
-  width: 80px;
-  height: calc(100% - 5px);
-  right: 100px;
-  z-index: 9;
   color: #000;
-  background: transparent;
+  height: calc(100% - 5px);
 }
 
 .generator .form-generator button {
-  width: 90px;
   height: calc(100% - 10px);
   cursor: pointer;
-  transition: .1s;
-  right: 5px;
   color: #fff;
+  padding-inline: 5px;
   border-radius: 50px;
+  margin-inline: 10px 5px;
   background: var(--dark-color);
 }
 
 @media (max-width: 768px) {
-  .generator .form-generator {
-    height: 40px;
-  }
 
-  .generator .form-generator input {
-    padding-right: 155px;
+  .generator .form-generator,
+  .generator .form-generator .details {
+    height: 40px;
   }
 
   .generator .form-generator input,
@@ -156,24 +153,13 @@ body * {
   .generator .form-generator button {
     font-size: 10px;
   }
-
-  .generator .form-generator .count,
-  .generator .form-generator button {
-    width: 70px;
-  }
-
-  .generator .form-generator .count {
-    right: 80px;
-  }
 }
 
 @media (max-width: 470px) {
-  .generator .form-generator {
-    height: 30px;
-  }
 
-  .generator .form-generator input {
-    padding-right: 110px;
+  .generator .form-generator,
+  .generator .form-generator .details {
+    height: 30px;
   }
 
   .generator .form-generator input,
@@ -182,18 +168,9 @@ body * {
     font-size: 8px;
   }
 
-  .generator .form-generator .count,
-  .generator .form-generator button {
-    width: 50px;
-  }
-
-  .generator .form-generator .count {
-    right: 60px;
-  }
-
   .generator .form-generator button {
     height: calc(100% - 5px);
-    right: 2.5px;
+    margin-inline: 5px 2.5px;
   }
 }
 
