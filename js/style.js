@@ -1,7 +1,8 @@
 const formGenerator = document.querySelector(".form-generator");
-const boardImages = document.querySelector(".board-images");
-const OPINAI_API_KEY = "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";
-let isImageGenerated = true;
+const boardImages = document.getElementById("board-images");
+const btnGenerate = document.getElementById("btn-generate");
+const OPINAI_API_KEY = "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";
+let isRetry = false;
 
 const updateImages = (imagesArray) => {
   imagesArray.forEach((imbObject, index) => {
@@ -20,6 +21,13 @@ const updateImages = (imagesArray) => {
   });
 };
 
+btnGenerate.addEventListener("click", () => {
+  if (formGenerator.querySelector("input").value != "") {
+    btnGenerate.style.opacity = ".5";
+    btnGenerate.style.pointerEvents = "none";
+  }
+});
+
 const generateAiImages = async (userPrompt, userImgQuantity) => {
   try {
     const response = await fetch(
@@ -33,24 +41,31 @@ const generateAiImages = async (userPrompt, userImgQuantity) => {
         body: JSON.stringify({
           prompt: userPrompt,
           n: parseInt(userImgQuantity),
-          size: "512x512",
+          size: "256x256",
           response_format: "b64_json",
         }),
       }
     );
     const { data } = await response.json();
+
     updateImages(data);
+
+    if (data) {
+      btnGenerate.style.opacity = "1";
+      btnGenerate.style.pointerEvents = "all";
+      formGenerator.querySelector("input").value = "";
+    }
   } catch (error) {
     console.log(error.message);
   } finally {
-    isImageGenerated = false;
+    isRetry = false;
   }
 };
 
 const handleFormSubmission = (e) => {
   e.preventDefault();
-  if (isImageGenerated) return;
-  isImageGenerated = true;
+  if (isRetry) return;
+  isRetry = true;
 
   // Get user [ input and image quantity ] values from the form
   const userPrompt = e.srcElement[0].value;
@@ -76,19 +91,6 @@ const handleFormSubmission = (e) => {
 
   boardImages.innerHTML = imageMarkupLoading;
 
-  const responseImages = Array.from(
-    { length: userImgQuantity },
-    () =>
-      `<div class="img loader">
-        <img src="./image.jpg" alt="image">
-        <a href="#" download data-hover="download" class="dounload-btn">
-          <i class="fa-solid fa-download"></i>
-          <img src="./image.jpg" alt="download icon">
-        </a>
-      </div>
-        `
-  ).join("");
-
   generateAiImages(userPrompt, userImgQuantity);
 };
 
@@ -97,4 +99,3 @@ function setStyleInCss(value) {
 }
 
 formGenerator.addEventListener("submit", handleFormSubmission);
-// formGenerator.addEventListener("submit", generateAiImages);
